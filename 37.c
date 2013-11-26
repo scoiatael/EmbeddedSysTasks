@@ -14,20 +14,33 @@ int no_opti(int height)
   return EXIT_SUCCESS;
 }
 
-#define mem_opti(height) {for(int j=0; j<(height+1)*(height+2)/2; j++) { putchar('*'); if(j) {  putchar('\n'); } } return EXIT_SUCCESS;}
+#define mem_opti(H){for (int j = 0; j < (H); j++) {for (int i = 0; i < j; i++) {putchar('*');}putchar('\n');}return EXIT_SUCCESS;}
+
+#define BORDER 1000
 
 int cpu_opti(int height)
 {
-  char buf[(height + 1) * (height + 1) + 1];
-  memset(buf, '*', sizeof(buf));
-  int offset = 0;
-  for (int i = 0; i < height; i++) {
-    buf[offset] = '\n';
-    offset += i + 2;
+  if(height < BORDER) {
+    char buf[(height + 1) * (height + 1) + 1];
+    memset(buf, '*', sizeof(buf));
+    int offset = 0;
+    for (int i = 0; i < height; i++) {
+      buf[offset] = '\n';
+      offset += i + 2;
+    }
+    buf[offset - height - 2 + 1] = '\0';
+    puts(buf);
+    return EXIT_SUCCESS;
+  } else {
+    for (int i = 0; i < height; i++) {
+      char buf[i+2];
+      memset(buf, '*', sizeof(buf));
+      buf[i] = '\n';
+      buf[i] = '\0';
+      puts(buf);
+    }
+    return EXIT_SUCCESS;
   }
-  buf[offset - height - 2 + 1] = '\0';
-  puts(buf);
-  return EXIT_SUCCESS;
 }
 
 void desc(const char *name )
@@ -47,7 +60,7 @@ int main(int argc, const char *argv[])
     if(argc < 3) {
       desc(argv[0]);
     }
-    return mem_opti(atoi(argv[2]));
+    mem_opti(atoi(argv[2]));
   } else if(strcmp(argv[1], "cpu") == 0) {
     if(argc < 3) {
       desc(argv[0]);
