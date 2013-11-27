@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
+#include "common.h"
 
 int no_opti(int height)
 {
@@ -14,7 +11,19 @@ int no_opti(int height)
   return EXIT_SUCCESS;
 }
 
-#define mem_opti(H){for (int j = 0; j < (H); j++) {for (int i = 0; i < j; i++) {putchar('*');}putchar('\n');}return EXIT_SUCCESS;}
+//#define mem_opti(H){for (int j = 0; j < (H); j++) {for (int i = 0; i < j; i++) {putchar('*');}putchar('\n');}return EXIT_SUCCESS;}
+//
+
+int mem_opti(int height)
+{
+  for (register int j = 0; j < height; j++) {
+    for (register int i = 0; i < j; i++) {
+      putchar('*');
+    }
+    putchar('\n');
+  }
+  return EXIT_SUCCESS;
+}
 
 #define BORDER 1000
 
@@ -51,24 +60,17 @@ void desc(const char *name )
   exit(EXIT_FAILURE);
 }
 
+
 int main(int argc, const char *argv[])
 {
   if(argc < 2 || strcmp(argv[1], "help") == 0) {
     desc(argv[0]);
   }
-  if(strcmp(argv[1], "mem") == 0) {
-    if(argc < 3) {
-      desc(argv[0]);
-    }
-    mem_opti(atoi(argv[2]));
-  } else if(strcmp(argv[1], "cpu") == 0) {
-    if(argc < 3) {
-      desc(argv[0]);
-    }
-    return cpu_opti(atoi(argv[2]));
-  } else {
-    printf("Running without optimizations..\n");
-    return no_opti(atoi(argv[1]));
-  }
+  
+  struct timeval t1, t2;  
+  DIFF(no_opti(atoi(argv[1])));
+  printf("without opt: %ld\n", timediff(&t1,&t2));
+  DIFF(cpu_opti(atoi(argv[1])));
+  printf("with opt: %ld\n", timediff(&t1,&t2));
   return 0;
 }
