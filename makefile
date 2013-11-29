@@ -1,4 +1,4 @@
 CC=gcc
-CFLAGS=-std=c99 -Wall -Wextra -pedantic -Werror -O2
+CFLAGS=-std=gnu99 -Wall -Wextra -Werror -O3
 
 
