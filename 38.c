@@ -30,6 +30,39 @@ void betMoveSpaces(char* tab, int size)
     tab[i+count] = tabp[i]; 
   }
 }
+
+void forMoveSpaces(char* tab, int size)
+{
+  int spaceCount=0;
+  for (int i = 0; i < size; i++) {
+    if(tab[i]==' '){
+      spaceCount++;
+    } else {
+      tab[i-spaceCount] = tab[i];
+    }
+  }
+  for (int i = 0; i < spaceCount; i++) {
+    tab[size-spaceCount-1+i] = ' ';
+  }
+}
+
+void mMoveSpaces(char* tab, int size)
+{
+  int i,count=0,tabp[size];
+  for (i = 0; i < size; i++) {
+    if(tab[i]==' ') { 
+      tab[count]=' ';
+      count++; 
+    } else {
+      tabp[i-count]=tab[i];
+    }
+  }
+  for(i = 0; i < size-count; i++) {
+    tab[i+count] = tabp[i]; 
+  }
+}
+
+
 #define COUNT 8000000
 int main(int argc, const char *argv[])
 {
@@ -41,7 +74,7 @@ int main(int argc, const char *argv[])
     } else {
       size = strlen(argv[i]);
     }
-    char copy[size],copy1[size];
+    char copy[size],copy1[size],copy2[size];
     if(strcmp(argv[i],"-i")==0)
     {
       //scanf("%1000000[^\n]", copy);
@@ -54,6 +87,7 @@ int main(int argc, const char *argv[])
     fprintf(stderr, "size: %d\n", size);
     puts("---");
     strcpy(copy1, copy);
+    strcpy(copy2, copy);
     struct timeval t1,t2;
     DIFF(moveSpaces(copy1,size));
     puts(copy1);
@@ -61,6 +95,9 @@ int main(int argc, const char *argv[])
     DIFF(betMoveSpaces(copy, size));
     puts(copy);
     fprintf(stderr, "forwards: %ld\n", timediff(&t1,&t2));
+    DIFF(forMoveSpaces(copy2, size));
+    puts(copy2);
+    fprintf(stderr, "forwards2: %ld\n", timediff(&t1,&t2));
   } 
   return 0;
 }
