@@ -24,7 +24,7 @@
 
 #define CERR(X,Y) { CERRS((X) == -1,Y) }
 
-#define timediff(t1,t2) ((t2)->tv_sec - (t1)->tv_sec)*1000+((t2)->tv_usec - (t1)->tv_usec)
+#define timediff(t1,t2) ((t2)->tv_sec - (t1)->tv_sec)*1000LL+((t2)->tv_usec - (t1)->tv_usec)
 
 
 #define DIFF(X) { gettimeofday(&t1,NULL); X; gettimeofday(&t2,NULL); }

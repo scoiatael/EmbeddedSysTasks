@@ -91,13 +91,13 @@ int main(int argc, const char *argv[])
     struct timeval t1,t2;
     DIFF(moveSpaces(copy1,size));
     puts(copy1);
-    fprintf(stderr, "backwards: %ld\n", timediff(&t1,&t2));
+    fprintf(stderr, "backwards: %lld\n", timediff(&t1,&t2));
     DIFF(betMoveSpaces(copy, size));
     puts(copy);
-    fprintf(stderr, "forwards: %ld\n", timediff(&t1,&t2));
+    fprintf(stderr, "forwards: %lld\n", timediff(&t1,&t2));
     DIFF(forMoveSpaces(copy2, size));
     puts(copy2);
-    fprintf(stderr, "forwards2: %ld\n", timediff(&t1,&t2));
+    fprintf(stderr, "forwards2: %lld\n", timediff(&t1,&t2));
   } 
   return 0;
 }
