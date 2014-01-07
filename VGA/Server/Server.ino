@@ -270,6 +270,7 @@ void receiveEvent (int howMany)
 void setup()
   {
   
+    delay(1000);
   // initial message ... change to suit
   for (int i = 0; i < verticalLines; i++)
     sprintf (message [i], "Line %03i - hello!", i);
