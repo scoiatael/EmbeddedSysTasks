@@ -212,7 +212,6 @@ ISR (TIMER1_OVF_vect)
   message[0][0] = (count / (8*8*8)) % 8 + '0'; printByte(count%(8*8*8), 0, 1);
   const int pointOffset = 6;
   printByte(p1p, 0, pointOffset); message[0][pointOffset + 3] = ':'; printByte(p2p, 0, pointOffset + 4);
-  printByte(facingx, 1, 0); printByte(facingy, 1, 4);
   
   //Display
   vLine = 0;
